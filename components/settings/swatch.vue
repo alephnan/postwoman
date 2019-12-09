@@ -1,12 +1,17 @@
 <template>
-  <div class="color" :data-color="color" :class="{ active: active }" v-tooltip="{ content: name || color }">
+  <div
+    class="color"
+    :data-color="color"
+    :class="{ active: active }"
+    v-tooltip="{ content: name || color }"
+  >
     <span :style="{ backgroundColor: color }" class="preview">
       <i v-if="active" class="material-icons activeTick">done</i>
     </span>
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .color {
   display: inline-flex;
   align-items: center;
@@ -15,6 +20,7 @@
   border-radius: 100%;
   border: 3px solid var(--bg-dark-color);
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 
   &.fg {
     color: var(--act-color);

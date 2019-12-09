@@ -45,13 +45,15 @@
             <li>
               <label for="method">{{ $t("method") }}</label>
               <select id="method" v-model="method" @change="methodChange">
-                <option>GET</option>
-                <option>HEAD</option>
-                <option>POST</option>
-                <option>PUT</option>
-                <option>DELETE</option>
-                <option>OPTIONS</option>
-                <option>PATCH</option>
+                <option value="GET">GET</option>
+                <option value="HEAD">HEAD</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+                <option value="CONNECT">CONNECT</option>
+                <option value="OPTIONS">OPTIONS</option>
+                <option value="TRACE">TRACE</option>
+                <option value="PATCH">PATCH</option>
               </select>
             </li>
             <li>
@@ -83,32 +85,23 @@
                 type="text"
                 v-model="label"
                 placeholder="(optional)"
-                list="preLabels"
               />
-              <datalist id="preLabels">
-                <option value="Login"></option>
-                <option value="Logout"></option>
-                <option value="Bug"></option>
-                <option value="Users"></option>
-              </datalist>
             </li>
-            <ul>
-              <li>
-                <label class="hide-on-small-screen" for="send">&nbsp;</label>
-                <button
-                  :disabled="!isValidURL"
-                  @click="sendRequest"
-                  id="send"
-                  ref="sendButton"
-                >
-                  {{ $t("send") }}
-                  <span id="hidden-message">{{ $t("again") }}</span>
-                  <span>
-                    <i class="material-icons">send</i>
-                  </span>
-                </button>
-              </li>
-            </ul>
+            <li>
+              <label class="hide-on-small-screen" for="send">&nbsp;</label>
+              <button
+                :disabled="!isValidURL"
+                @click="sendRequest"
+                id="send"
+                ref="sendButton"
+              >
+                {{ $t("send") }}
+                <!-- <span id="hidden-message">{{ $t("again") }}</span> -->
+                <span>
+                  <i class="material-icons">send</i>
+                </span>
+              </button>
+            </li>
           </ul>
           <div
             class="blue"
@@ -245,7 +238,7 @@
                 class="icon"
                 id="show-modal"
                 @click="showModal = true"
-                v-tooltip.bottom="'Import cURL'"
+                v-tooltip.bottom="$t('import_curl')"
               >
                 <i class="material-icons">import_export</i>
               </button>
@@ -288,18 +281,17 @@
                 id="copyRequest"
                 ref="copyRequest"
                 :disabled="!isValidURL"
-                v-tooltip.bottom="'Copy Request URL'"
+                v-tooltip.bottom="$t('copy_request_link')"
               >
                 <i class="material-icons">file_copy</i>
               </button>
-
               <button
                 class="icon"
                 @click="saveRequest"
                 id="saveRequest"
                 ref="saveRequest"
                 :disabled="!isValidURL"
-                v-tooltip.bottom="'Save to Collections'"
+                v-tooltip.bottom="$t('save_to_collections')"
               >
                 <i class="material-icons">save</i>
               </button>
