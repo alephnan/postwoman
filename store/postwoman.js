@@ -39,20 +39,6 @@ export const SETTINGS_KEYS = [
   "FRAME_COLORS_ENABLED",
 
   /**
-   * Whether or not requests should be proxied.
-   */
-  "PROXY_ENABLED",
-
-  /**
-   * The URL of the proxy to connect to for requests.
-   */
-  "PROXY_URL",
-  /**
-   * The security key of the proxy.
-   */
-  "PROXY_KEY",
-
-  /**
    * An array of properties to exclude from the URL.
    * e.g. 'auth'
    */

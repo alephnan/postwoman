@@ -5,11 +5,7 @@
         <li>
           <label>{{ $t("background") }}</label>
           <div class="backgrounds">
-            <span
-              :key="theme.class"
-              @click="applyTheme(theme)"
-              v-for="theme in themes"
-            >
+            <span :key="theme.class" @click="applyTheme(theme)" v-for="theme in themes">
               <swatch
                 :active="settings.THEME_CLASS === theme.class"
                 :class="{ vibrant: theme.vibrant }"
@@ -50,86 +46,12 @@
             >
               {{ $t("multi_color") }}
               {{
-                settings.FRAME_COLORS_ENABLED ? $t("enabled") : $t("disabled")
+              settings.FRAME_COLORS_ENABLED ? $t("enabled") : $t("disabled")
               }}
             </pw-toggle>
           </span>
         </li>
       </ul>
-    </pw-section>
-
-    <pw-section class="blue" label="Proxy" ref="proxy">
-      <ul>
-        <li>
-          <div class="flex-wrap">
-            <span>
-              <pw-toggle
-                :on="settings.PROXY_ENABLED"
-                @change="toggleSetting('PROXY_ENABLED')"
-              >
-                {{ $t("proxy") }}
-                {{ settings.PROXY_ENABLED ? $t("enabled") : $t("disabled") }}
-              </pw-toggle>
-            </span>
-            <a
-              href="https://github.com/liyasthomas/postwoman/wiki/Proxy"
-              target="_blank"
-              rel="noopener"
-            >
-              <button class="icon" v-tooltip="'Wiki'">
-                <i class="material-icons">help</i>
-              </button>
-            </a>
-          </div>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <div class="flex-wrap">
-            <label for="url">{{ $t("url") }}</label>
-            <button
-              class="icon"
-              @click="settings.PROXY_URL = `https://postwoman.apollotv.xyz/`"
-              v-tooltip.bottom="'Reset to default'"
-            >
-              <i class="material-icons">clear_all</i>
-            </button>
-          </div>
-          <input
-            id="url"
-            type="url"
-            v-model="settings.PROXY_URL"
-            :disabled="!settings.PROXY_ENABLED"
-          />
-        </li>
-      </ul>
-      <ul class="info">
-        <li>
-          <p>
-            {{ $t("postwoman_official_proxy_hosting") }}
-            <br />
-            {{ $t("read_the") }}
-            <a href="https://apollotv.xyz/legal" target="_blank" rel="noopener">
-              {{ $t("apollotv_privacy_policy") }} </a
-            >.
-          </p>
-        </li>
-      </ul>
-      <!--
-      PROXY SETTINGS URL AND KEY
-      --------------
-		  This feature is currently not finished.
-			<ul>
-				<li>
-					<label for="url">URL</label>
-					<input id="url" type="url" v-model="settings.PROXY_URL" :disabled="!settings.PROXY_ENABLED">
-				</li>
-				<li>
-					<label for="key">Key</label>
-					<input id="key" type="password" v-model="settings.PROXY_KEY" :disabled="!settings.PROXY_ENABLED" @change="applySetting('PROXY_KEY', $event)">
-				</li>
-			</ul>
-      -->
     </pw-section>
   </div>
 </template>
@@ -236,25 +158,9 @@ export default {
         THEME_COLOR_VIBRANT: true,
 
         FRAME_COLORS_ENABLED:
-          this.$store.state.postwoman.settings.FRAME_COLORS_ENABLED || false,
-        PROXY_ENABLED:
-          this.$store.state.postwoman.settings.PROXY_ENABLED || false,
-        PROXY_URL:
-          this.$store.state.postwoman.settings.PROXY_URL ||
-          "https://postwoman.apollotv.xyz/",
-        PROXY_KEY: this.$store.state.postwoman.settings.PROXY_KEY || ""
+          this.$store.state.postwoman.settings.FRAME_COLORS_ENABLED || false
       }
     };
-  },
-
-  watch: {
-    proxySettings: {
-      deep: true,
-      handler(value) {
-        this.applySetting("PROXY_URL", value.url);
-        this.applySetting("PROXY_KEY", value.key);
-      }
-    }
   },
 
   methods: {
@@ -301,15 +207,6 @@ export default {
   },
   beforeMount() {
     this.settings.THEME_COLOR = this.getActiveColor();
-  },
-
-  computed: {
-    proxySettings() {
-      return {
-        url: this.settings.PROXY_URL,
-        key: this.settings.PROXY_KEY
-      };
-    }
   }
 };
 </script>

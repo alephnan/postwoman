@@ -76,8 +76,6 @@ export default {
   multi_color: "彩色",
   enabled: "已启用",
   disabled: "已禁用",
-  proxy: "代理",
-  postwoman_official_proxy_hosting: "Postwoman的官方代理由ApolloTV托管",
   read_the: "阅读",
   apollotv_privacy_policy: "ApolloTV隐私政策"
 };

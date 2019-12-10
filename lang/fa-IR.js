@@ -76,8 +76,6 @@ export default {
   multi_color: "چند رنگی",
   enabled: "فعال",
   disabled: "غیر فعال",
-  proxy: "پراکسی",
-  postwoman_official_proxy_hosting: "پراکسی Postwoman  برروی هاست ApolloTV قرار دارد.",
   read_the: "بخوانید",
   apollotv_privacy_policy: "خط مشی رازداری ApolloTV"
 };

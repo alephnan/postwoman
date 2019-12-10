@@ -2,12 +2,7 @@
   <div class="page">
     <div class="content">
       <div class="page-columns inner-left">
-        <pw-section
-          v-if="showPreRequestScript"
-          class="orange"
-          label="Pre-Request"
-          ref="preRequest"
-        >
+        <pw-section v-if="showPreRequestScript" class="orange" label="Pre-Request" ref="preRequest">
           <ul>
             <li>
               <div class="flex-wrap">
@@ -79,22 +74,11 @@
             </li>
             <li>
               <label for="label">{{ $t("label") }}</label>
-              <input
-                id="label"
-                name="label"
-                type="text"
-                v-model="label"
-                placeholder="(optional)"
-              />
+              <input id="label" name="label" type="text" v-model="label" placeholder="(optional)" />
             </li>
             <li>
               <label class="hide-on-small-screen" for="send">&nbsp;</label>
-              <button
-                :disabled="!isValidURL"
-                @click="sendRequest"
-                id="send"
-                ref="sendButton"
-              >
+              <button :disabled="!isValidURL" @click="sendRequest" id="send" ref="sendButton">
                 {{ $t("send") }}
                 <!-- <span id="hidden-message">{{ $t("again") }}</span> -->
                 <span>
@@ -103,11 +87,7 @@
               </button>
             </li>
           </ul>
-          <div
-            class="blue"
-            label="Request Body"
-            v-if="['POST', 'PUT', 'PATCH'].includes(method)"
-          >
+          <div class="blue" label="Request Body" v-if="['POST', 'PUT', 'PATCH'].includes(method)">
             <ul>
               <li>
                 <label for="contentType">{{ $t("content_type") }}</label>
@@ -115,8 +95,7 @@
                   :source="validContentTypes"
                   :spellcheck="false"
                   v-model="contentType"
-                  >Content Type</autocomplete
-                >
+                >Content Type</autocomplete>
               </li>
             </ul>
             <ul>
@@ -130,20 +109,11 @@
                   </span>
                   <div>
                     <label for="payload">
-                      <button
-                        class="icon"
-                        @click="$refs.payload.click()"
-                        v-tooltip="'Upload file'"
-                      >
+                      <button class="icon" @click="$refs.payload.click()" v-tooltip="'Upload file'">
                         <i class="material-icons">attach_file</i>
                       </button>
                     </label>
-                    <input
-                      ref="payload"
-                      name="payload"
-                      type="file"
-                      @change="uploadPayload"
-                    />
+                    <input ref="payload" name="payload" type="file" @change="uploadPayload" />
                   </div>
                 </div>
               </li>
@@ -195,11 +165,7 @@
                 </li>
                 <div>
                   <li>
-                    <button
-                      class="icon"
-                      @click="removeRequestBodyParam(index)"
-                      id="delParam"
-                    >
+                    <button class="icon" @click="removeRequestBodyParam(index)" id="delParam">
                       <i class="material-icons">delete</i>
                     </button>
                   </li>
@@ -207,11 +173,7 @@
               </ul>
               <ul>
                 <li>
-                  <button
-                    class="icon"
-                    @click="addRequestBodyParam"
-                    name="addrequest"
-                  >
+                  <button class="icon" @click="addRequestBodyParam" name="addrequest">
                     <i class="material-icons">add</i>
                     <span>{{ $t("add_new") }}</span>
                   </button>
@@ -222,12 +184,7 @@
               <ul>
                 <li>
                   <label for="rawBody">{{ $t("raw_request_body") }}</label>
-                  <textarea
-                    id="rawBody"
-                    @keydown="formatRawParams"
-                    rows="8"
-                    v-model="rawParams"
-                  ></textarea>
+                  <textarea id="rawBody" @keydown="formatRawParams" rows="8" v-model="rawParams"></textarea>
                 </li>
               </ul>
             </div>
@@ -267,11 +224,8 @@
                   class="material-icons"
                   :class="showPreRequestScript"
                   v-if="!showPreRequestScript"
-                  >code</i
-                >
-                <i class="material-icons" :class="showPreRequestScript" v-else
-                  >close</i
-                >
+                >code</i>
+                <i class="material-icons" :class="showPreRequestScript" v-else>close</i>
               </button>
             </span>
             <span>
@@ -311,11 +265,7 @@
           <input id="tab-one" type="radio" name="options" checked="checked" />
           <label for="tab-one">{{ $t("authentication") }}</label>
           <div class="tab">
-            <pw-section
-              class="cyan"
-              label="Authentication"
-              ref="authentication"
-            >
+            <pw-section class="cyan" label="Authentication" ref="authentication">
               <ul>
                 <li>
                   <div class="flex-wrap">
@@ -339,11 +289,7 @@
               </ul>
               <ul v-if="auth === 'Basic'">
                 <li>
-                  <input
-                    placeholder="User"
-                    name="http_basic_user"
-                    v-model="httpUser"
-                  />
+                  <input placeholder="User" name="http_basic_user" v-model="httpUser" />
                 </li>
                 <li>
                   <input
@@ -361,36 +307,22 @@
                       ref="switchVisibility"
                       @click="switchVisibility"
                     >
-                      <i
-                        class="material-icons"
-                        v-if="passwordFieldType === 'text'"
-                        >visibility</i
-                      >
-                      <i
-                        class="material-icons"
-                        v-if="passwordFieldType !== 'text'"
-                        >visibility_off</i
-                      >
+                      <i class="material-icons" v-if="passwordFieldType === 'text'">visibility</i>
+                      <i class="material-icons" v-if="passwordFieldType !== 'text'">visibility_off</i>
                     </button>
                   </li>
                 </div>
               </ul>
               <ul v-else-if="auth === 'Bearer Token'">
                 <li>
-                  <input
-                    placeholder="Token"
-                    name="bearer_token"
-                    v-model="bearerToken"
-                  />
+                  <input placeholder="Token" name="bearer_token" v-model="bearerToken" />
                 </li>
               </ul>
               <div class="flex-wrap">
                 <pw-toggle
                   :on="!urlExcludes.auth"
                   @change="setExclude('auth', !$event)"
-                >
-                  {{ $t("include_in_url") }}
-                </pw-toggle>
+                >{{ $t("include_in_url") }}</pw-toggle>
               </div>
             </pw-section>
           </div>
@@ -454,11 +386,7 @@
                 </li>
                 <div>
                   <li>
-                    <button
-                      class="icon"
-                      @click="removeRequestHeader(index)"
-                      id="header"
-                    >
+                    <button class="icon" @click="removeRequestHeader(index)" id="header">
                       <i class="material-icons">delete</i>
                     </button>
                   </li>
@@ -532,11 +460,7 @@
                 </li>
                 <div>
                   <li>
-                    <button
-                      class="icon"
-                      @click="removeRequestParam(index)"
-                      id="param"
-                    >
+                    <button class="icon" @click="removeRequestParam(index)" id="param">
                       <i class="material-icons">delete</i>
                     </button>
                   </li>
@@ -565,15 +489,10 @@
                 {{ activeSidebar ? "last_page" : "first_page" }}
               </i>
             </button>
-          </div> -->
+          </div>-->
         </section>
 
-        <pw-section
-          class="purple"
-          id="response"
-          label="Response"
-          ref="response"
-        >
+        <pw-section class="purple" id="response" label="Response" ref="response">
           <ul>
             <li>
               <label for="status">{{ $t("status") }}</label>
@@ -610,9 +529,7 @@
                         : $t('collapse_response')
                     }"
                   >
-                    <i class="material-icons">
-                      {{ !expandResponse ? "unfold_more" : "unfold_less" }}
-                    </i>
+                    <i class="material-icons">{{ !expandResponse ? "unfold_more" : "unfold_less" }}</i>
                   </button>
                   <button
                     class="icon"
@@ -655,17 +572,14 @@
                   src="about:blank"
                 ></iframe>
               </div>
-              <div
-                class="align-right"
-                v-if="response.body && responseType === 'text/html'"
-              >
+              <div class="align-right" v-if="response.body && responseType === 'text/html'">
                 <button class="icon" @click.prevent="togglePreview">
-                  <i class="material-icons">
-                    {{ !previewEnabled ? "visibility" : "visibility_off" }}
-                  </i>
-                  <span>{{
+                  <i class="material-icons">{{ !previewEnabled ? "visibility" : "visibility_off" }}</i>
+                  <span>
+                    {{
                     previewEnabled ? $t("hide_preview") : $t("preview_html")
-                  }}</span>
+                    }}
+                  </span>
                 </button>
               </div>
             </li>
@@ -677,10 +591,7 @@
           <input id="history-tab" type="radio" name="side" checked="checked" />
           <label for="history-tab">{{ $t("history") }}</label>
           <div class="tab">
-            <history
-              @useHistory="handleUseHistory"
-              ref="historyComponent"
-            ></history>
+            <history @useHistory="handleUseHistory" ref="historyComponent"></history>
           </div>
           <input id="collection-tab" type="radio" name="side" />
           <label for="collection-tab">{{ $t("collections") }}</label>
@@ -716,12 +627,7 @@
         <div slot="body">
           <ul>
             <li>
-              <textarea
-                id="import-text"
-                autofocus
-                rows="8"
-                placeholder="Enter cURL"
-              ></textarea>
+              <textarea id="import-text" autofocus rows="8" placeholder="Enter cURL"></textarea>
             </li>
           </ul>
         </div>
@@ -1421,20 +1327,10 @@ export default {
       if (typeof requestOptions.data === "string") {
         requestOptions.data = parseTemplateString(requestOptions.data);
       }
-      const config = this.$store.state.postwoman.settings.PROXY_ENABLED
-        ? {
-            method: "POST",
-            url:
-              this.$store.state.postwoman.settings.PROXY_URL ||
-              "https://postwoman.apollotv.xyz/",
-            data: requestOptions
-          }
-        : requestOptions;
+      const config = requestOptions;
 
       const response = await this.$axios(config);
-      return this.$store.state.postwoman.settings.PROXY_ENABLED
-        ? response.data
-        : response;
+      return response;
     },
     async sendRequest() {
       this.$toast.clear();

@@ -76,9 +76,6 @@ export default {
   multi_color: "Aneka Warna",
   enabled: "Aktif",
   disabled: "Non-aktif",
-  proxy: "Proxy",
-  postwoman_official_proxy_hosting:
-    "Proxy Resmi Postwoman's dipersembahkan oleh ApolloTV.",
   read_the: "Baca",
   apollotv_privacy_policy: "Kebijakan Privasi ApolloTV"
 };

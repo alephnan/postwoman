@@ -76,8 +76,6 @@ export default {
   multi_color: "Multi cor",
   enabled: "Ativado",
   disabled: "Desativado",
-  proxy: "Proxy",
-  postwoman_official_proxy_hosting: "postwoman_official_proxy_hosting",
   read_the: "read_the",
   apollotv_privacy_policy: "apollotv_privacy_policy"
 };

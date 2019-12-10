@@ -76,9 +76,6 @@ export default {
   multi_color: "Multi-couleurs",
   enabled: "Activé",
   disabled: "Désactivé",
-  proxy: "Proxy",
-  postwoman_official_proxy_hosting:
-    "Le proxy officiel de Postwoman est hébergé par ApolloTV.",
   read_the: "Lire la",
   apollotv_privacy_policy: "politique de confidentialité ApolloTV"
 };
