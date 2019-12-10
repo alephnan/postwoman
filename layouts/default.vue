@@ -25,85 +25,8 @@
               <i class="material-icons">settings</i>
             </nuxt-link>
           </nav>
-          <div v-if="$route.path === '/'">
-            <nav class="secondary-nav">
-              <ul>
-                <li>
-                  <a href="#request" v-tooltip.right="$t('request')">
-                    <i class="material-icons">cloud_upload</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#options" v-tooltip.right="$t('options')">
-                    <i class="material-icons">toc</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#response" v-tooltip.right="$t('response')">
-                    <i class="material-icons">cloud_download</i>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div v-else-if="$route.path === '/realtime'">
-            <nav class="secondary-nav">
-              <ul>
-                <li>
-                  <a href="#request" v-tooltip.right="$t('request')">
-                    <i class="material-icons">cloud_upload</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#response" v-tooltip.right="$t('communication')">
-                    <i class="material-icons">cloud_download</i>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div v-else-if="$route.path === '/graphql'">
-            <nav class="secondary-nav">
-              <ul>
-                <li>
-                  <a href="#endpoint" v-tooltip.right="$t('endpoint')">
-                    <i class="material-icons">cloud</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#schema" v-tooltip.right="$t('schema')">
-                    <i class="material-icons">assignment_returned</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#query" v-tooltip.right="$t('query')">
-                    <i class="material-icons">cloud_upload</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#response" v-tooltip.right="$t('response')">
-                    <i class="material-icons">cloud_download</i>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div v-else-if="$route.path === '/settings'">
-            <nav class="secondary-nav">
-              <ul>
-                <li>
-                  <a href="#theme" v-tooltip.right="$t('theme')">
-                    <i class="material-icons">brush</i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#proxy" v-tooltip.right="$t('proxy')">
-                    <i class="material-icons">public</i>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <div v-if="$route.path === '/'"></div>
+          <div v-else-if="$route.path === '/settings'"></div>
         </aside>
         <div class="main" id="main">
           <header class="header">
