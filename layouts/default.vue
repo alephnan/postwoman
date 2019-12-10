@@ -77,12 +77,6 @@
                       </button>
                     </div>
                     <div>
-                      <button class="icon" @click="showSupport = true" v-close-popover>
-                        <i class="material-icons">favorite</i>
-                        <span>{{ $t("support_us") }}</span>
-                      </button>
-                    </div>
-                    <div>
                       <button
                         class="icon"
                         onClick="window.open('https://twitter.com/share?text=👽 Postwoman • API request builder - Helps you create your requests faster, saving you precious time on your development&url=https://postwoman.io&hashtags=postwoman&via=liyasthomas');"
@@ -197,49 +191,6 @@
       </div>
       <div slot="footer"></div>
     </modal>
-    <modal v-if="showSupport" @close="showSupport = false">
-      <div slot="header">
-        <ul>
-          <li>
-            <div class="flex-wrap">
-              <h3 class="title">{{ $t("support_us_on") }}</h3>
-              <div>
-                <button class="icon" @click="showSupport = false">
-                  <i class="material-icons">close</i>
-                </button>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div slot="body">
-        <div>
-          <a href="https://opencollective.com/postwoman" target="_blank" rel="noopener">
-            <button class="icon">
-              <i class="material-icons">favorite</i>
-              <span>{{ $t("open_collective") }}</span>
-            </button>
-          </a>
-        </div>
-        <div>
-          <a href="https://www.paypal.me/liyascthomas" target="_blank" rel="noopener">
-            <button class="icon">
-              <i class="material-icons">favorite</i>
-              <span>{{ $t("paypal") }}</span>
-            </button>
-          </a>
-        </div>
-        <div>
-          <a href="https://www.patreon.com/liyasthomas" target="_blank" rel="noopener">
-            <button class="icon">
-              <i class="material-icons">favorite</i>
-              <span>{{ $t("patreon") }}</span>
-            </button>
-          </a>
-        </div>
-      </div>
-      <div slot="footer"></div>
-    </modal>
   </div>
 </template>
 
@@ -271,8 +222,7 @@ export default {
       // prompt.
       showInstallPrompt: null,
       version: {},
-      showShortcuts: false,
-      showSupport: false
+      showShortcuts: false
     };
   },
 
