@@ -274,38 +274,11 @@
                   </div>
                   <select id="auth" v-model="auth">
                     <option>None</option>
-                    <option>Basic</option>
                     <option>Bearer Token</option>
                   </select>
                 </li>
               </ul>
-              <ul v-if="auth === 'Basic'">
-                <li>
-                  <input placeholder="User" name="http_basic_user" v-model="httpUser" />
-                </li>
-                <li>
-                  <input
-                    placeholder="Password"
-                    name="http_basic_passwd"
-                    :type="passwordFieldType"
-                    v-model="httpPassword"
-                  />
-                </li>
-                <div>
-                  <li>
-                    <button
-                      class="icon"
-                      id="switchVisibility"
-                      ref="switchVisibility"
-                      @click="switchVisibility"
-                    >
-                      <i class="material-icons" v-if="passwordFieldType === 'text'">visibility</i>
-                      <i class="material-icons" v-if="passwordFieldType !== 'text'">visibility_off</i>
-                    </button>
-                  </li>
-                </div>
-              </ul>
-              <ul v-else-if="auth === 'Bearer Token'">
+              <ul v-if="auth === 'Bearer Token'">
                 <li>
                   <input placeholder="Token" name="bearer_token" v-model="bearerToken" />
                 </li>
@@ -759,9 +732,6 @@ export default {
       this.path = newValue.path;
       this.method = newValue.method;
       this.auth = newValue.auth;
-      this.httpUser = newValue.httpUser;
-      this.httpPassword = newValue.httpPassword;
-      this.passwordFieldType = newValue.passwordFieldType;
       this.bearerToken = newValue.bearerToken;
       this.params = newValue.params;
       this.bodyParams = newValue.bodyParams;
@@ -814,22 +784,6 @@ export default {
       },
       set(value) {
         this.$store.commit("setState", { value, attribute: "auth" });
-      }
-    },
-    httpUser: {
-      get() {
-        return this.$store.state.request.httpUser;
-      },
-      set(value) {
-        this.$store.commit("setState", { value, attribute: "httpUser" });
-      }
-    },
-    httpPassword: {
-      get() {
-        return this.$store.state.request.httpPassword;
-      },
-      set(value) {
-        this.$store.commit("setState", { value, attribute: "httpPassword" });
       }
     },
     bearerToken: {
@@ -894,17 +848,6 @@ export default {
       },
       set(value) {
         this.$store.commit("setState", { value, attribute: "contentType" });
-      }
-    },
-    passwordFieldType: {
-      get() {
-        return this.$store.state.request.passwordFieldType;
-      },
-      set(value) {
-        this.$store.commit("setState", {
-          value,
-          attribute: "passwordFieldType"
-        });
       }
     },
 
@@ -983,9 +926,6 @@ export default {
       if (this.requestType === "JavaScript XHR") {
         const requestString = [];
         requestString.push("const xhr = new XMLHttpRequest()");
-        const user = this.auth === "Basic" ? "'" + this.httpUser + "'" : null;
-        const pswd =
-          this.auth === "Basic" ? "'" + this.httpPassword + "'" : null;
         requestString.push(
           "xhr.open('" +
             this.method +
@@ -994,9 +934,9 @@ export default {
             this.pathName +
             this.queryString +
             "', true, " +
-            user +
+            null +
             ", " +
-            pswd +
+            null +
             ")"
         );
         if (this.auth === "Bearer Token") {
@@ -1031,14 +971,7 @@ export default {
           'fetch("' + this.url + this.pathName + this.queryString + '", {\n'
         );
         requestString.push('  method: "' + this.method + '",\n');
-        if (this.auth === "Basic") {
-          const basic = this.httpUser + ":" + this.httpPassword;
-          headers.push(
-            '    "Authorization": "Basic ' +
-              window.btoa(unescape(encodeURIComponent(basic))) +
-              '",\n'
-          );
-        } else if (this.auth === "Bearer Token") {
+        if (this.auth === "Bearer Token") {
           headers.push(
             '    "Authorization": "Bearer ' + this.bearerToken + '",\n'
           );
@@ -1072,14 +1005,7 @@ export default {
         requestString.push(
           "  '" + this.url + this.pathName + this.queryString + "' \\\n"
         );
-        if (this.auth === "Basic") {
-          const basic = this.httpUser + ":" + this.httpPassword;
-          requestString.push(
-            "  -H 'Authorization: Basic " +
-              window.btoa(unescape(encodeURIComponent(basic))) +
-              "' \\\n"
-          );
-        } else if (this.auth === "Bearer Token") {
+        if (this.auth === "Bearer Token") {
           requestString.push(
             "  -H 'Authorization: Bearer " + this.bearerToken + "' \\\n"
           );
@@ -1128,11 +1054,10 @@ export default {
       }
       return getEnvironmentVariablesFromScript(this.preRequestScript);
     },
-    async makeRequest(auth, headers, requestBody, preRequestScript) {
+    async makeRequest(headers, requestBody, preRequestScript) {
       const requestOptions = {
         method: this.method,
         url: this.url + this.pathName + this.queryString,
-        auth,
         headers,
         data: requestBody ? requestBody.toString() : null
       };
@@ -1188,14 +1113,6 @@ export default {
       this.response.status = "Fetching...";
       this.response.body = "Loading...";
 
-      const auth =
-        this.auth === "Basic"
-          ? {
-              username: this.httpUser,
-              password: this.httpPassword
-            }
-          : null;
-
       let headers = {};
 
       // If the request has a body, we want to ensure Content-Length and
@@ -1216,7 +1133,6 @@ export default {
         const startTime = Date.now();
 
         const payload = await this.makeRequest(
-          auth,
           headers,
           requestBody,
           this.showPreRequestScript && this.preRequestScript
@@ -1571,16 +1487,10 @@ export default {
         });
       }
     },
-    switchVisibility() {
-      this.passwordFieldType =
-        this.passwordFieldType === "password" ? "text" : "password";
-    },
     clearContent(name, e) {
       switch (name) {
         case "auth":
           this.auth = "None";
-          this.httpUser = "";
-          this.httpPassword = "";
           this.bearerToken = "";
           break;
         case "parameters":
@@ -1593,8 +1503,6 @@ export default {
             (this.auth = "None"),
             (this.path = "/api/users"),
             (this.auth = "None");
-          this.httpUser = "";
-          this.httpPassword = "";
           this.bearerToken = "";
           this.params = [];
           this.bodyParams = [];
@@ -1615,9 +1523,6 @@ export default {
         path: this.path,
         method: this.method,
         auth: this.auth,
-        httpUser: this.httpUser,
-        httpPassword: this.httpPassword,
-        passwordFieldType: this.passwordFieldType,
         bearerToken: this.bearerToken,
         params: this.params,
         bodyParams: this.bodyParams,
@@ -1695,8 +1600,6 @@ export default {
         vm.url,
         vm.auth,
         vm.path,
-        vm.httpUser,
-        vm.httpPassword,
         vm.bearerToken,
         vm.headers,
         vm.params,

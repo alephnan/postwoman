@@ -55,7 +55,6 @@ export default {
   events: "Eventos",
   url: "URL",
   get_schema: "Obtener esquema",
-  header_list: "Lista de Cabeceras",
   add_new: "Agregar nuevo",
   response: "Respuesta",
   query: "Consulta",

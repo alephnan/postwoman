@@ -59,7 +59,6 @@ export default {
   events: "Events",
   url: "URL",
   get_schema: "Get schema",
-  header_list: "Header list",
   add_new: "Add new",
   response: "Response",
   query: "Query",

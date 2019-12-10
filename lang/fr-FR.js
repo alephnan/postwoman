@@ -55,7 +55,6 @@ export default {
   events: "Évènements",
   url: "URL",
   get_schema: "Récuperer le schéma",
-  header_list: "Liste d'en-têtes",
   add_new: "Ajouter",
   response: "Réponse",
   query: "Requête",
