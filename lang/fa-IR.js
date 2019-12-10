@@ -5,7 +5,6 @@ export default {
   settings: "تنظیمات",
   request: "درخواست",
   install_pwa: "نصب PWA",
-  tweet: "Tweet",
   options: "گزینه‌ها",
   communication: "ارتباط",
   endpoint: "Endpoint",
