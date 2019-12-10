@@ -1059,17 +1059,7 @@ export default {
               "')"
           );
         }
-        if (this.headers) {
-          this.headers.forEach(element => {
-            requestString.push(
-              "xhr.setRequestHeader('" +
-                element.key +
-                "', '" +
-                element.value +
-                "')"
-            );
-          });
-        }
+
         if (["POST", "PUT", "PATCH"].includes(this.method)) {
           const requestBody = this.rawInput
             ? this.rawParams
@@ -1116,13 +1106,6 @@ export default {
             '    "Content-Type": "' + this.contentType + '; charset=utf-8",\n'
           );
         }
-        if (this.headers) {
-          this.headers.forEach(element => {
-            headers.push(
-              '    "' + element.key + '": "' + element.value + '",\n'
-            );
-          });
-        }
         headers = headers.join("").slice(0, -2);
         requestString.push("  headers: {\n" + headers + "\n  },\n");
         requestString.push('  credentials: "same-origin"\n');
@@ -1153,13 +1136,6 @@ export default {
           requestString.push(
             "  -H 'Authorization: Bearer " + this.bearerToken + "' \\\n"
           );
-        }
-        if (this.headers) {
-          this.headers.forEach(element => {
-            requestString.push(
-              "  -H '" + element.key + ": " + element.value + "' \\\n"
-            );
-          });
         }
         if (["POST", "PUT", "PATCH"].includes(this.method)) {
           const requestBody = this.rawInput
