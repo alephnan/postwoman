@@ -42,7 +42,6 @@ export default {
   preview_html: "预览HTML",
   history: "历史记录",
   collections: "收藏夹",
-  import_curl: "批量导入",
   import: "导入",
   generate_code: "生成代码",
   request_type: "请求类型",

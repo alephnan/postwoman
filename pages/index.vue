@@ -193,14 +193,6 @@
             <span>
               <button
                 class="icon"
-                id="show-modal"
-                @click="showModal = true"
-                v-tooltip.bottom="$t('import_curl')"
-              >
-                <i class="material-icons">import_export</i>
-              </button>
-              <button
-                class="icon"
                 id="code"
                 @click="isHidden = !isHidden"
                 :disabled="!isValidURL"
@@ -608,40 +600,6 @@
         v-on:hide-model="hideRequestModal"
         v-bind:editing-request="editRequest"
       ></save-request-as>
-
-      <pw-modal v-if="showModal" @close="showModal = false">
-        <div slot="header">
-          <ul>
-            <li>
-              <div class="flex-wrap">
-                <h3 class="title">{{ $t("import_curl") }}</h3>
-                <div>
-                  <button class="icon" @click="showModal = false">
-                    <i class="material-icons">close</i>
-                  </button>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div slot="body">
-          <ul>
-            <li>
-              <textarea id="import-text" autofocus rows="8" placeholder="Enter cURL"></textarea>
-            </li>
-          </ul>
-        </div>
-        <div slot="footer">
-          <ul>
-            <li>
-              <button class="icon" @click="handleImport">
-                <i class="material-icons">get_app</i>
-                <span>{{ $t("import") }}</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </pw-modal>
 
       <pw-modal v-if="!isHidden" @close="isHidden = true">
         <div slot="header">
@@ -1470,18 +1428,6 @@ export default {
           this.$toast.error(error + " (F12 for details)", {
             icon: "error"
           });
-          if (!this.$store.state.postwoman.settings.PROXY_ENABLED) {
-            this.$toast.info("Try enabling Proxy", {
-              icon: "help",
-              duration: 8000,
-              action: {
-                text: "Settings",
-                onClick: (e, toastObject) => {
-                  this.$router.push({ path: "/settings" });
-                }
-              }
-            });
-          }
         }
       }
     },

@@ -42,7 +42,6 @@ export default {
   preview_html: "Preview html",
   history: "Histórico",
   collections: "Coleções",
-  import_curl: "Importar curl",
   import: "Importar",
   generate_code: "Gerar código",
   request_type: "Tipo de request",
