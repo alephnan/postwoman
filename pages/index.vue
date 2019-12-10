@@ -316,30 +316,6 @@
           <label for="tab-two">{{ $t("headers") }}</label>
           <div class="tab">
             <pw-section class="orange" label="Headers" ref="headers">
-              <ul>
-                <li>
-                  <div class="flex-wrap">
-                    <label for="headerList">{{ $t("header_list") }}</label>
-                    <div>
-                      <button
-                        class="icon"
-                        @click="clearContent('headers', $event)"
-                        v-tooltip.bottom="'Clear'"
-                      >
-                        <i class="material-icons">clear_all</i>
-                      </button>
-                    </div>
-                  </div>
-                  <textarea
-                    id="headerList"
-                    readonly
-                    v-textarea-auto-height="headerString"
-                    v-model="headerString"
-                    placeholder="(add at least one header)"
-                    rows="1"
-                  ></textarea>
-                </li>
-              </ul>
               <ul v-for="(header, index) in headers" :key="index">
                 <li>
                   <input
@@ -1043,13 +1019,6 @@ export default {
           .map(({ key, value }) => `${key}=${encodeURIComponent(value)}`)
           .join("&");
       }
-    },
-    headerString() {
-      const result = this.headers
-        .filter(({ key }) => !!key)
-        .map(({ key, value }) => `${key}: ${value}`)
-        .join(",\n");
-      return result === "" ? "" : `${result}`;
     },
     queryString() {
       const result = this.params
