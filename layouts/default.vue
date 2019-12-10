@@ -85,10 +85,7 @@
           <footer class="footer">
             <div class="flex-wrap">
               <span v-if="version.name" class="mono">
-                <a href="https://liyasthomas.web.app" target="_blank" rel="noopener">
-                  <button class="icon" v-tooltip="'Liyas Thomas'">🦄</button>
-                </a>
-                <a
+                <!-- <a
                   v-bind:href="
                     'https://github.com/liyasthomas/postwoman/releases/tag/' +
                       version.name
@@ -96,16 +93,8 @@
                   target="_blank"
                   rel="noopener"
                   v-tooltip="'GitHub'"
-                >{{ version.name }}</a>
-                <!-- <span v-if="version.hash">
-                  -
-                  <a
-                    v-bind:href="'https://github.com/liyasthomas/postwoman/commit/' + version.hash"
-                    target="_blank"
-                    rel="noopener"
-                  >{{version.hash}}</a>
-                </span>-->
-                <!-- <span v-if="version.variant">({{version.variant}})</span> -->
+                ></a>-->
+                {{ version.name }}
               </span>
               <span>
                 <v-popover>
