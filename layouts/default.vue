@@ -17,128 +17,6 @@
               <logo alt class="material-icons" style="height: 24px;"></logo>
             </nuxt-link>
             <nuxt-link
-              :to="localePath('realtime')"
-              :class="linkActive('/realtime')"
-              v-tooltip.right="$t('realtime')"
-            >
-              <i class="material-icons">settings_input_hdmi</i>
-            </nuxt-link>
-            <nuxt-link
-              :to="localePath('graphql')"
-              :class="linkActive('/graphql')"
-              v-tooltip.right="$t('graphql')"
-              aria-label="GraphQL"
-            >
-              <svg
-                class="material-icons"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                viewBox="0 0 400 400"
-              >
-                <g>
-                  <g>
-                    <g>
-                      <rect
-                        x="122"
-                        y="-0.4"
-                        transform="matrix(-0.866 -0.5 0.5 -0.866 163.3196 363.3136)"
-                        width="16.6"
-                        height="320.3"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <rect x="39.8" y="272.2" width="320.3" height="16.6" />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <rect
-                        x="37.9"
-                        y="312.2"
-                        transform="matrix(-0.866 -0.5 0.5 -0.866 83.0693 663.3409)"
-                        width="185"
-                        height="16.6"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <rect
-                        x="177.1"
-                        y="71.1"
-                        transform="matrix(-0.866 -0.5 0.5 -0.866 463.3409 283.0693)"
-                        width="185"
-                        height="16.6"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <rect
-                        x="122.1"
-                        y="-13"
-                        transform="matrix(-0.5 -0.866 0.866 -0.5 126.7903 232.1221)"
-                        width="16.6"
-                        height="185"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <rect
-                        x="109.6"
-                        y="151.6"
-                        transform="matrix(-0.5 -0.866 0.866 -0.5 266.0828 473.3766)"
-                        width="320.3"
-                        height="16.6"
-                      />
-                    </g>
-                  </g>
-                  <g>
-                    <g><rect x="52.5" y="107.5" width="16.6" height="185" /></g>
-                  </g>
-                  <g>
-                    <g>
-                      <rect x="330.9" y="107.5" width="16.6" height="185" />
-                    </g>
-                  </g>
-                  <g>
-                    <g>
-                      <rect
-                        x="262.4"
-                        y="240.1"
-                        transform="matrix(-0.5 -0.866 0.866 -0.5 126.7953 714.2875)"
-                        width="14.5"
-                        height="160.9"
-                      />
-                    </g>
-                  </g>
-                  <path
-                    d="M369.5,297.9c-9.6,16.7-31,22.4-47.7,12.8c-16.7-9.6-22.4-31-12.8-47.7c9.6-16.7,31-22.4,47.7-12.8C373.5,259.9,379.2,281.2,369.5,297.9"
-                  />
-                  <path
-                    d="M90.9,137c-9.6,16.7-31,22.4-47.7,12.8c-16.7-9.6-22.4-31-12.8-47.7c9.6-16.7,31-22.4,47.7-12.8C94.8,99,100.5,120.3,90.9,137"
-                  />
-                  <path
-                    d="M30.5,297.9c-9.6-16.7-3.9-38,12.8-47.7c16.7-9.6,38-3.9,47.7,12.8c9.6,16.7,3.9,38-12.8,47.7C61.4,320.3,40.1,314.6,30.5,297.9"
-                  />
-                  <path
-                    d="M309.1,137c-9.6-16.7-3.9-38,12.8-47.7c16.7-9.6,38-3.9,47.7,12.8c9.6,16.7,3.9,38-12.8,47.7C340.1,159.4,318.7,153.7,309.1,137"
-                  />
-                  <path
-                    d="M200,395.8c-19.3,0-34.9-15.6-34.9-34.9c0-19.3,15.6-34.9,34.9-34.9c19.3,0,34.9,15.6,34.9,34.9C234.9,380.1,219.3,395.8,200,395.8"
-                  />
-                  <path
-                    d="M200,74c-19.3,0-34.9-15.6-34.9-34.9c0-19.3,15.6-34.9,34.9-34.9c19.3,0,34.9,15.6,34.9,34.9C234.9,58.4,219.3,74,200,74"
-                  />
-                </g>
-              </svg>
-            </nuxt-link>
-            <nuxt-link
               :to="localePath('settings')"
               :class="linkActive('/settings')"
               v-tooltip.right="$t('settings')"
@@ -270,21 +148,13 @@
                   </button>
                   <template slot="popover">
                     <div>
-                      <button
-                        class="icon"
-                        @click="showShortcuts = true"
-                        v-close-popover
-                      >
+                      <button class="icon" @click="showShortcuts = true" v-close-popover>
                         <i class="material-icons">keyboard</i>
                         <span>{{ $t("shortcuts") }}</span>
                       </button>
                     </div>
                     <div>
-                      <button
-                        class="icon"
-                        @click="showSupport = true"
-                        v-close-popover
-                      >
+                      <button class="icon" @click="showSupport = true" v-close-popover>
                         <i class="material-icons">favorite</i>
                         <span>{{ $t("support_us") }}</span>
                       </button>
@@ -317,14 +187,8 @@
           <footer class="footer">
             <div class="flex-wrap">
               <span v-if="version.name" class="mono">
-                <a
-                  href="https://liyasthomas.web.app"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <button class="icon" v-tooltip="'Liyas Thomas'">
-                    🦄
-                  </button>
+                <a href="https://liyasthomas.web.app" target="_blank" rel="noopener">
+                  <button class="icon" v-tooltip="'Liyas Thomas'">🦄</button>
                 </a>
                 <a
                   v-bind:href="
@@ -334,9 +198,7 @@
                   target="_blank"
                   rel="noopener"
                   v-tooltip="'GitHub'"
-                >
-                  {{ version.name }}
-                </a>
+                >{{ version.name }}</a>
                 <!-- <span v-if="version.hash">
                   -
                   <a
@@ -344,15 +206,11 @@
                     target="_blank"
                     rel="noopener"
                   >{{version.hash}}</a>
-                </span> -->
+                </span>-->
                 <!-- <span v-if="version.variant">({{version.variant}})</span> -->
               </span>
               <span>
-                <a
-                  href="https://postwoman.launchaco.com"
-                  target="_blank"
-                  rel="noopener"
-                >
+                <a href="https://postwoman.launchaco.com" target="_blank" rel="noopener">
                   <button class="icon" v-tooltip="$t('subscribe')">
                     <i class="material-icons">email</i>
                   </button>
@@ -364,9 +222,7 @@
                   <template slot="popover">
                     <div v-for="locale in availableLocales" :key="locale.code">
                       <nuxt-link :to="switchLocalePath(locale.code)">
-                        <button class="icon" v-close-popover>
-                          {{ locale.name }}
-                        </button>
+                        <button class="icon" v-close-popover>{{ locale.name }}</button>
                       </nuxt-link>
                     </div>
                   </template>
@@ -435,11 +291,7 @@
       </div>
       <div slot="body">
         <div>
-          <a
-            href="https://opencollective.com/postwoman"
-            target="_blank"
-            rel="noopener"
-          >
+          <a href="https://opencollective.com/postwoman" target="_blank" rel="noopener">
             <button class="icon">
               <i class="material-icons">favorite</i>
               <span>{{ $t("open_collective") }}</span>
@@ -447,11 +299,7 @@
           </a>
         </div>
         <div>
-          <a
-            href="https://www.paypal.me/liyascthomas"
-            target="_blank"
-            rel="noopener"
-          >
+          <a href="https://www.paypal.me/liyascthomas" target="_blank" rel="noopener">
             <button class="icon">
               <i class="material-icons">favorite</i>
               <span>{{ $t("paypal") }}</span>
@@ -459,11 +307,7 @@
           </a>
         </div>
         <div>
-          <a
-            href="https://www.patreon.com/liyasthomas"
-            target="_blank"
-            rel="noopener"
-          >
+          <a href="https://www.patreon.com/liyasthomas" target="_blank" rel="noopener">
             <button class="icon">
               <i class="material-icons">favorite</i>
               <span>{{ $t("patreon") }}</span>

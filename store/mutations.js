@@ -3,26 +3,6 @@ export default {
     request[attribute] = value;
   },
 
-  setGQLState({ gql }, { attribute, value }) {
-    gql[attribute] = value;
-  },
-
-  addGQLHeader({ gql }, object) {
-    gql.headers.push(object);
-  },
-
-  removeGQLHeader({ gql }, index) {
-    gql.headers.splice(index, 1);
-  },
-
-  setGQLHeaderKey({ gql }, { index, value }) {
-    gql.headers[index].key = value;
-  },
-
-  setGQLHeaderValue({ gql }, { index, value }) {
-    gql.headers[index].value = value;
-  },
-
   addHeaders({ request }, value) {
     request.headers.push(value);
   },
