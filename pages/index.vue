@@ -310,12 +310,6 @@
                   <input placeholder="Token" name="bearer_token" v-model="bearerToken" />
                 </li>
               </ul>
-              <div class="flex-wrap">
-                <pw-toggle
-                  :on="!urlExcludes.auth"
-                  @change="setExclude('auth', !$event)"
-                >{{ $t("include_in_url") }}</pw-toggle>
-              </div>
             </pw-section>
           </div>
           <input id="tab-two" type="radio" name="options" />
@@ -775,7 +769,6 @@ export default {
       showRequestModal: false,
       editRequest: {},
 
-      urlExcludes: {},
       responseBodyText: "",
       responseBodyType: "text",
       responseBodyMaxLines: 16,
@@ -783,15 +776,6 @@ export default {
     };
   },
   watch: {
-    urlExcludes: {
-      deep: true,
-      handler() {
-        this.$store.commit("postwoman/applySetting", [
-          "URL_EXCLUDES",
-          Object.assign({}, this.urlExcludes)
-        ]);
-      }
-    },
     contentType(val) {
       this.rawInput = !this.knownContentTypes.includes(val);
     },
@@ -1672,16 +1656,7 @@ export default {
           return `${key}=${JSON.stringify(this[key])}&`;
         } else return "";
       };
-      let flats = [
-        "method",
-        "url",
-        "path",
-        !this.urlExcludes.auth ? "auth" : null,
-        !this.urlExcludes.httpUser ? "httpUser" : null,
-        !this.urlExcludes.httpPassword ? "httpPassword" : null,
-        !this.urlExcludes.bearerToken ? "bearerToken" : null,
-        "contentType"
-      ]
+      let flats = ["method", "url", "path", "contentType"]
         .filter(item => item !== null)
         .map(item => flat(item));
       let deeps = ["headers", "params"].map(item => deep(item));
@@ -1833,17 +1808,6 @@ export default {
       this.showRequestModal = false;
       this.editRequest = {};
     },
-    setExclude(excludedField, excluded) {
-      if (excludedField === "auth") {
-        this.urlExcludes.auth = excluded;
-        this.urlExcludes.httpUser = excluded;
-        this.urlExcludes.httpPassword = excluded;
-        this.urlExcludes.bearerToken = excluded;
-      } else {
-        this.urlExcludes[excludedField] = excluded;
-      }
-      this.setRouteQueryState();
-    },
     methodChange() {
       // this.$store.commit('setState', { 'value': ["POST", "PUT", "PATCH"].includes(this.method) ? 'application/json' : '', 'attribute': 'contentType' })
       this.contentType = ["POST", "PUT", "PATCH"].includes(this.method)
@@ -1889,14 +1853,6 @@ export default {
     document.addEventListener("keydown", this._keyListener.bind(this));
   },
   created() {
-    this.urlExcludes = this.$store.state.postwoman.settings.URL_EXCLUDES || {
-      // Exclude authentication by default for security reasons.
-      auth: true,
-      httpUser: true,
-      httpPassword: true,
-      bearerToken: true
-    };
-
     if (Object.keys(this.$route.query).length)
       this.setRouteQueries(this.$route.query);
     this.$watch(

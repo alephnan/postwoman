@@ -34,7 +34,6 @@ export default {
   hide_prerequest_script: "Pre-Request scriptini gizle",
   authentication: "Authentication",
   authentication_type: "Authentication tipi",
-  include_in_url: "URL'den içeri aktar",
   parameters: "Parametre",
   expand_response: "Cevabı genişlet",
   collapse_response: "Cevap daralt",

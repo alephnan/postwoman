@@ -34,7 +34,6 @@ export default {
   hide_prerequest_script: "Esconder script de pré-request",
   authentication: "Autenticação",
   authentication_type: "Tipo de autenticação",
-  include_in_url: "Incluir na url",
   parameters: "Parâmetros",
   expand_response: "Expandir response",
   collapse_response: "Esconder response",

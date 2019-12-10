@@ -34,7 +34,6 @@ export default {
   hide_prerequest_script: "隐藏预请求脚本",
   authentication: "认证方式",
   authentication_type: "认证类型",
-  include_in_url: "包含在URL中",
   parameters: "参数",
   expand_response: "展开显示响应内容",
   collapse_response: "折叠显示响应内容",

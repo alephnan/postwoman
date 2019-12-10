@@ -34,7 +34,6 @@ export default {
   hide_prerequest_script: "Sembunyikan Skrip Pra-Permintaan",
   authentication: "Autentikasi",
   authentication_type: "Tipe Autentikasi",
-  include_in_url: "Sertakan Di URL",
   parameters: "Parameter",
   expand_response: "Bentangkan Balasan",
   collapse_response: "Ciutkan Balasan",

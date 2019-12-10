@@ -34,7 +34,6 @@ export default {
   hide_prerequest_script: "Hide Pre-Request Script",
   authentication: "Authentication",
   authentication_type: "Authentication type",
-  include_in_url: "در URL گنجانده شود",
   parameters: "پارامترها",
   expand_response: "نمایش کامل پاسخ",
   collapse_response: "نمایش مختصر پاسخ",
