@@ -45,43 +45,6 @@ const parseCurlCommand = curlCommand => {
       }
     }
   }
-  let headers;
-
-  const parseHeaders = headerFieldName => {
-    if (parsedArguments[headerFieldName]) {
-      if (!headers) {
-        headers = {};
-      }
-      if (!Array.isArray(parsedArguments[headerFieldName])) {
-        parsedArguments[headerFieldName] = [parsedArguments[headerFieldName]];
-      }
-      parsedArguments[headerFieldName].forEach(header => {
-        if (header.includes("Cookie")) {
-          // stupid javascript tricks: closure
-          cookieString = header;
-        } else {
-          let colonIndex = header.indexOf(":");
-          let headerName = header.substring(0, colonIndex);
-          let headerValue = header.substring(colonIndex + 1).trim();
-          headers[headerName] = headerValue;
-        }
-      });
-    }
-  };
-
-  parseHeaders("H");
-  parseHeaders("header");
-  if (parsedArguments.A) {
-    if (!headers) {
-      headers = [];
-    }
-    headers["User-Agent"] = parsedArguments.A;
-  } else if (parsedArguments["user-agent"]) {
-    if (!headers) {
-      headers = [];
-    }
-    headers["User-Agent"] = parsedArguments["user-agent"];
-  }
 
   if (parsedArguments.b) {
     cookieString = parsedArguments.b;
@@ -182,9 +145,6 @@ const parseCurlCommand = curlCommand => {
 
   if (Object.keys(query).length > 0) {
     request.query = query;
-  }
-  if (headers) {
-    request.headers = headers;
   }
   request["method"] = method;
 

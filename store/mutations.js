@@ -3,22 +3,6 @@ export default {
     request[attribute] = value;
   },
 
-  addHeaders({ request }, value) {
-    request.headers.push(value);
-  },
-
-  removeHeaders({ request }, index) {
-    request.headers.splice(index, 1);
-  },
-
-  setKeyHeader({ request }, { index, value }) {
-    request.headers[index].key = value;
-  },
-
-  setValueHeader({ request }, { index, value }) {
-    request.headers[index].value = value;
-  },
-
   addParams({ request }, value) {
     request.params.push(value);
   },

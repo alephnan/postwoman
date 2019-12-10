@@ -312,58 +312,6 @@
               </ul>
             </pw-section>
           </div>
-          <input id="tab-two" type="radio" name="options" />
-          <label for="tab-two">{{ $t("headers") }}</label>
-          <div class="tab">
-            <pw-section class="orange" label="Headers" ref="headers">
-              <ul v-for="(header, index) in headers" :key="index">
-                <li>
-                  <input
-                    :placeholder="'header ' + (index + 1)"
-                    :name="'header' + index"
-                    :value="header.key"
-                    @change="
-                      $store.commit('setKeyHeader', {
-                        index,
-                        value: $event.target.value
-                      })
-                    "
-                    @keyup.prevent="setRouteQueryState"
-                    autofocus
-                  />
-                </li>
-                <li>
-                  <input
-                    :placeholder="'value ' + (index + 1)"
-                    :name="'value' + index"
-                    :value="header.value"
-                    @change="
-                      $store.commit('setValueHeader', {
-                        index,
-                        value: $event.target.value
-                      })
-                    "
-                    @keyup.prevent="setRouteQueryState"
-                  />
-                </li>
-                <div>
-                  <li>
-                    <button class="icon" @click="removeRequestHeader(index)" id="header">
-                      <i class="material-icons">delete</i>
-                    </button>
-                  </li>
-                </div>
-              </ul>
-              <ul>
-                <li>
-                  <button class="icon" @click="addRequestHeader">
-                    <i class="material-icons">add</i>
-                    <span>{{ $t("add_new") }}</span>
-                  </button>
-                </li>
-              </ul>
-            </pw-section>
-          </div>
           <input id="tab-three" type="radio" name="options" />
           <label for="tab-three">{{ $t("parameters") }}</label>
           <div class="tab">
@@ -815,7 +763,6 @@ export default {
       this.httpPassword = newValue.httpPassword;
       this.passwordFieldType = newValue.passwordFieldType;
       this.bearerToken = newValue.bearerToken;
-      this.headers = newValue.headers;
       this.params = newValue.params;
       this.bodyParams = newValue.bodyParams;
       this.rawParams = newValue.rawParams;
@@ -1250,12 +1197,6 @@ export default {
           : null;
 
       let headers = {};
-      let headersObject = {};
-
-      Object.keys(headers).forEach(id => {
-        headersObject[headers[id].key] = headers[id].value;
-      });
-      headers = headersObject;
 
       // If the request has a body, we want to ensure Content-Length and
       // Content-Type are sent.
@@ -1263,31 +1204,13 @@ export default {
       if (this.hasRequestBody) {
         requestBody = this.rawInput ? this.rawParams : this.rawRequestBody;
 
-        Object.assign(headers, {
-          //'Content-Length': requestBody.length,
-          "Content-Type": `${this.contentType}; charset=utf-8`
-        });
+        //'Content-Length': requestBody.length,
+        headers["Content-Type"] = `${this.contentType}; charset=utf-8`;
       }
 
       // If the request uses a token for auth, we want to make sure it's sent here.
       if (this.auth === "Bearer Token")
         headers["Authorization"] = `Bearer ${this.bearerToken}`;
-
-      headers = Object.assign(
-        // Clone the app headers object first, we don't want to
-        // mutate it with the request headers added by default.
-        Object.assign({}, this.headers)
-
-        // We make our temporary headers object the source so
-        // that you can override the added headers if you
-        // specify them.
-        // headers
-      );
-
-      Object.keys(headers).forEach(id => {
-        headersObject[headers[id].key] = headers[id].value;
-      });
-      headers = headersObject;
 
       try {
         const startTime = Date.now();
@@ -1378,29 +1301,6 @@ export default {
 
       this.paramsWatchEnabled = false;
       this.params = params;
-    },
-    addRequestHeader() {
-      this.$store.commit("addHeaders", {
-        key: "",
-        value: ""
-      });
-      return false;
-    },
-    removeRequestHeader(index) {
-      // .slice() gives us an entirely new array rather than giving us just the reference
-      const oldHeaders = this.headers.slice();
-
-      this.$store.commit("removeHeaders", index);
-      this.$toast.error("Deleted", {
-        icon: "delete",
-        action: {
-          text: "Undo",
-          onClick: (e, toastObject) => {
-            this.headers = oldHeaders;
-            toastObject.remove();
-          }
-        }
-      });
     },
     addRequestParam() {
       this.$store.commit("addParams", { key: "", value: "" });
@@ -1658,13 +1558,6 @@ export default {
         this.url =
           this.url.slice(-1).pop() == "/" ? this.url.slice(0, -1) : this.url;
         this.path = "";
-        this.headers = [];
-        for (const key of Object.keys(parsedCurl.headers)) {
-          this.$store.commit("addHeaders", {
-            key: key,
-            value: parsedCurl.headers[key]
-          });
-        }
         this.method = parsedCurl.method.toUpperCase();
         if (parsedCurl["data"]) {
           this.rawInput = true;
@@ -1690,9 +1583,6 @@ export default {
           this.httpPassword = "";
           this.bearerToken = "";
           break;
-        case "headers":
-          this.headers = [];
-          break;
         case "parameters":
           this.params = [];
           break;
@@ -1706,7 +1596,6 @@ export default {
           this.httpUser = "";
           this.httpPassword = "";
           this.bearerToken = "";
-          this.headers = [];
           this.params = [];
           this.bodyParams = [];
           this.rawParams = "";
@@ -1730,7 +1619,6 @@ export default {
         httpPassword: this.httpPassword,
         passwordFieldType: this.passwordFieldType,
         bearerToken: this.bearerToken,
-        headers: this.headers,
         params: this.params,
         bodyParams: this.bodyParams,
         rawParams: this.rawParams,

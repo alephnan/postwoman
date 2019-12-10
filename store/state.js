@@ -9,7 +9,6 @@ export default () => ({
     httpPassword: "",
     passwordFieldType: "password",
     bearerToken: "",
-    headers: [],
     params: [],
     bodyParams: [],
     rawParams: "",

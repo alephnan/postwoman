@@ -51,7 +51,6 @@ export default {
   request_type: "Request type",
   generated_code: "Generated code",
   status: "Status",
-  headers: "Headers",
   websocket: "WebSocket",
   waiting_for_connection: "(waiting for connection)",
   message: "Message",
