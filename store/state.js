@@ -16,10 +16,5 @@ export default () => ({
     rawInput: false,
     requestType: "",
     contentType: ""
-  },
-  gql: {
-    url: "https://rickandmortyapi.com/graphql",
-    headers: [],
-    query: ""
   }
 });
