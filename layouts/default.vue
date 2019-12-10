@@ -108,11 +108,6 @@
                 <!-- <span v-if="version.variant">({{version.variant}})</span> -->
               </span>
               <span>
-                <a href="https://postwoman.launchaco.com" target="_blank" rel="noopener">
-                  <button class="icon" v-tooltip="$t('subscribe')">
-                    <i class="material-icons">email</i>
-                  </button>
-                </a>
                 <v-popover>
                   <button class="icon" v-tooltip="$t('choose_language')">
                     <i class="material-icons">translate</i>
